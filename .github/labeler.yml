@@ -1,0 +1,57 @@
+# Auto-labeling configuration for pull requests
+
+# Backend changes
+backend:
+  - backend/**/*
+
+# Frontend changes
+frontend:
+  - dashboard/**/*
+  - portfolio/**/*
+
+# Dashboard specific
+dashboard:
+  - dashboard/**/*
+
+# Portfolio specific
+portfolio:
+  - portfolio/**/*
+
+# Documentation changes
+documentation:
+  - docs/**/*
+  - '*.md'
+  - README.md
+
+# DevOps changes
+devops:
+  - .github/**/*
+  - .devops/**/*
+  - docker-compose.yml
+  - Dockerfile
+  - '**/*.Dockerfile'
+
+# Configuration changes
+config:
+  - '**/*.json'
+  - '**/*.yml'
+  - '**/*.yaml'
+  - .editorconfig
+  - .prettierrc
+  - .eslintrc*
+
+# Testing
+tests:
+  - tests/**/*
+  - '**/*.test.js'
+  - '**/*.spec.js'
+
+# Scripts
+scripts:
+  - scripts/**/*
+  - tools/**/*
+
+# Dependencies
+dependencies:
+  - '**/package.json'
+  - '**/package-lock.json'

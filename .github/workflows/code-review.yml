@@ -1,0 +1,97 @@
+name: Automated Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  code-review:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+    
+    - name: Install dependencies
+      run: |
+        npm install -g eslint prettier
+    
+    - name: Run ESLint
+      id: eslint
+      run: |
+        cd backend && npx eslint . --ext .js --format json > ../eslint-backend.json || true
+        cd ../dashboard && npx eslint . --ext .js,.jsx --format json > ../eslint-dashboard.json || true
+        cd ../portfolio && npx eslint . --ext .js,.jsx --format json > ../eslint-portfolio.json || true
+      continue-on-error: true
+    
+    - name: Check code formatting
+      id: prettier
+      run: |
+        npx prettier --check "**/*.{js,jsx,json,md}" \
+          --ignore-path .gitignore || echo "formatting_issues=true" >> $GITHUB_OUTPUT
+      continue-on-error: true
+    
+    - name: Comment PR with review
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          let comment = '## 🤖 Automated Code Review\n\n';
+          
+          // Check for formatting issues
+          if ('${{ steps.prettier.outputs.formatting_issues }}' === 'true') {
+            comment += '### ⚠️ Code Formatting Issues\n';
+            comment += 'Some files need formatting. Run `npx prettier --write .` to fix.\n\n';
+          } else {
+            comment += '### ✅ Code Formatting\nAll files are properly formatted.\n\n';
+          }
+          
+          // Add general recommendations
+          comment += '### 💡 Recommendations\n';
+          comment += '- Ensure all tests pass before merging\n';
+          comment += '- Update documentation if needed\n';
+          comment += '- Follow the [Contributing Guide](../docs/guides/contributing.md)\n\n';
+          comment += '---\n';
+          comment += '*This is an automated review. Please address any issues before merging.*';
+          
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: comment
+          });
+
+  security-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+    
+    - name: Run npm audit
+      run: |
+        cd backend && npm audit --audit-level=moderate || true
+        cd ../dashboard && npm audit --audit-level=moderate || true
+        cd ../portfolio && npm audit --audit-level=moderate || true
+    
+    - name: Check for secrets
+      uses: trufflesecurity/trufflehog@main
+      with:
+        path: ./
+        base: ${{ github.event.repository.default_branch }}
+        head: HEAD

@@ -1,0 +1,66 @@
+name: Welcome New Contributors
+
+on:
+  issues:
+    types: [opened]
+  pull_request_target:
+    types: [opened]
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  welcome:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Welcome new contributor
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const isFirstTime = context.payload.sender.type !== 'Bot';
+          
+          if (context.eventName === 'issues') {
+            const message = `👋 Thanks for opening your first issue! 
+            
+            We appreciate your contribution to the MERN Portfolio project. 
+            
+            Please make sure you've:
+            - [ ] Searched for similar issues
+            - [ ] Provided all necessary information
+            - [ ] Followed our [Code of Conduct](../CODE_OF_CONDUCT.md)
+            
+            A maintainer will review your issue soon. In the meantime, feel free to:
+            - ⭐ Star the repository
+            - 📖 Read our [documentation](../docs)
+            - 💬 Join discussions
+            
+            Happy coding! 🚀`;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: message
+            });
+          } else if (context.eventName === 'pull_request_target') {
+            const message = `🎉 Thanks for your first pull request!
+            
+            We're excited to review your contribution to the MERN Portfolio project.
+            
+            Before we merge, please ensure:
+            - [ ] All tests pass
+            - [ ] Code follows our [style guide](../docs/development/code-style.md)
+            - [ ] Documentation is updated (if needed)
+            - [ ] Commits follow [conventional commits](https://www.conventionalcommits.org/)
+            
+            A maintainer will review your PR soon. Thanks for contributing! 🙌`;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: message
+            });
+          }
