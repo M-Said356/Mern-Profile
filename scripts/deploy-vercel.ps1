@@ -87,4 +87,4 @@ Write-Host "1. Configure environment variables in Vercel Dashboard"
 Write-Host "2. Test your deployed applications"
 Write-Host "3. Set up custom domains (optional)"
 Write-Host ""
-Write-Host "📖 For detailed instructions, see DEPLOYMENT_GUIDE.md" -ForegroundColor Cyan
+Write-Host "For detailed instructions, see DEPLOYMENT_GUIDE.md" -ForegroundColor Cyan
