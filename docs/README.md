@@ -102,10 +102,10 @@ docs/
 
 ## 📋 Policies & Legal
 
-- [📜 Code of Conduct](./policies/CODE_OF_CONDUCT.md) - Community guidelines
-- [🔒 Security Policy](./policies/SECURITY.md) - Security and vulnerability reporting
-- [📝 Changelog](./CHANGELOG.md) - Version history
-- [⚖️ License](./LICENSE.md) - MIT License
+- [📜 Code of Conduct](../CODE_OF_CONDUCT.md) - Community guidelines
+- [🔒 Security Policy](../SECURITY.md) - Security and vulnerability reporting
+- [📝 Changelog](../CHANGELOG.md) - Version history
+- [⚖️ License](../LICENSE) - MIT License
 
 ---
 

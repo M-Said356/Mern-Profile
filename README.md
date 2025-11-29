@@ -113,10 +113,10 @@ mern-profile/
 │   └── db-restore.js       # Database restore
 │
 ├── 📁 docs/                 # Documentation
-│   ├── getting-started.md  # Setup guide
-│   ├── api.md              # API docs
-│   ├── deployment.md       # Deploy guide
-│   └── ...                 # More docs
+│   ├── guides/             # User guides
+│   ├── api/                # API reference
+│   ├── deployment/         # Deploy guides
+│   └── development/        # Dev docs
 │
 └── 📁 tests/                # Test suites
     ├── unit/               # Unit tests
@@ -183,16 +183,16 @@ Comprehensive documentation is available in the [`docs/`](./docs) folder:
 
 | Document | Description |
 |----------|-------------|
-| [📖 Getting Started](./docs/getting-started.md) | Complete setup and installation guide |
-| [🏛️ Architecture](./docs/architecture.md) | System design and architecture overview |
-| [🔌 API Reference](./docs/api.md) | Complete API endpoint documentation |
-| [🚀 Deployment Guide](./docs/deployment.md) | Deploy to various platforms |
-| [🐳 Docker Guide](./docs/docker.md) | Docker and containerization |
-| [☸️ Kubernetes Guide](./docs/kubernetes.md) | Kubernetes deployment |
-| [⚙️ Environment Variables](./docs/environment-variables.md) | Configuration reference |
-| [🗄️ Database Schema](./docs/database-schema.md) | MongoDB schema documentation |
-| [🤝 Contributing](./docs/contributing.md) | Contribution guidelines |
-| [🔧 Troubleshooting](./docs/troubleshooting.md) | Common issues and solutions |
+| [📖 Getting Started](./docs/guides/getting-started.md) | Complete setup and installation guide |
+| [🏛️ Architecture](./docs/development/architecture.md) | System design and architecture overview |
+| [🔌 API Reference](./docs/api/endpoints.md) | Complete API endpoint documentation |
+| [🚀 Deployment Guide](./docs/deployment/overview.md) | Deploy to various platforms |
+| [🐳 Docker Guide](./docs/deployment/docker.md) | Docker and containerization |
+| [☸️ Kubernetes Guide](./docs/deployment/kubernetes.md) | Kubernetes deployment |
+| [⚙️ Environment Variables](./docs/guides/environment-variables.md) | Configuration reference |
+| [🗄️ Database Schema](./docs/api/database-schema.md) | MongoDB schema documentation |
+| [🤝 Contributing](./docs/guides/contributing.md) | Contribution guidelines |
+| [🔧 Troubleshooting](./docs/guides/troubleshooting.md) | Common issues and solutions |
 
 ---
 
@@ -209,7 +209,7 @@ Comprehensive documentation is available in the [`docs/`](./docs) folder:
 cd .devops
 docker-compose up -d
 ```
-[Docker Guide →](./docs/docker.md)
+[Docker Guide →](./docs/deployment/docker.md)
 
 </td>
 <td align="center" width="33%">
@@ -218,7 +218,7 @@ docker-compose up -d
 ```bash
 kubectl apply -f .devops/kubernetes/
 ```
-[K8s Guide →](./docs/kubernetes.md)
+[K8s Guide →](./docs/deployment/kubernetes.md)
 
 </td>
 <td align="center" width="33%">
@@ -227,7 +227,7 @@ kubectl apply -f .devops/kubernetes/
 ```bash
 vercel --prod
 ```
-[Vercel Guide →](./docs/vercel-deployment.md)
+[Vercel Guide →](./docs/deployment/vercel.md)
 
 </td>
 </tr>
@@ -235,12 +235,12 @@ vercel --prod
 
 ### Platform-Specific Guides
 
-- **Vercel** - [Deployment Guide](./docs/vercel-deployment.md)
-- **Heroku** - [Deployment Guide](./docs/deployment.md#heroku-backend)
-- **Railway** - [Deployment Guide](./docs/deployment.md#railway-full-stack)
-- **DigitalOcean** - [Deployment Guide](./docs/deployment.md#digitalocean-app-platform)
-- **AWS** - [Deployment Guide](./docs/aws-deployment.md)
-- **Azure** - [Deployment Guide](./docs/azure-deployment.md)
+- **Vercel** - [Deployment Guide](./docs/deployment/vercel.md)
+- **Heroku** - [Deployment Guide](./docs/deployment/overview.md#heroku-backend)
+- **Railway** - [Deployment Guide](./docs/deployment/overview.md#railway-full-stack)
+- **DigitalOcean** - [Deployment Guide](./docs/deployment/overview.md#digitalocean-app-platform)
+- **AWS** - [Deployment Guide](./docs/deployment/aws.md)
+- **Azure** - [Deployment Guide](./docs/deployment/azure.md)
 
 ---
 
@@ -299,7 +299,7 @@ cd portfolio && npm test
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see our [Contributing Guide](./docs/contributing.md) for details.
+We welcome contributions! Please see our [Contributing Guide](./docs/guides/contributing.md) for details.
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
